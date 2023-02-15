@@ -41,5 +41,4 @@ document.querySelector('.cep-button').addEventListener('click', searchCep);
 
 window.onload = () => {
   getElementsApi();
-  fetchProduct('MLB1405519561');
 };
