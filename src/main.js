@@ -25,7 +25,7 @@ const getElementsApi = async () => {
 
   // Pego os dados da API já tratados e faço um forEach usando a function já pronta "createProductElement" que cria automaticamente os elementos quando passado o parameratro array que é o results do objeto da API e adiciono esses elementos no meu HTML colocando ele como filho do "sectionProducts".
   try {
-    const arrays = await fetchProductsList('computador');
+    const arrays = await fetchProductsList('Monitor');
     arrays.forEach((array) => {
       const setHtml = createProductElement(array);
       sectionProducts.appendChild(setHtml);
