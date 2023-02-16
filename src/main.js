@@ -1,5 +1,5 @@
 import { searchCep } from './helpers/cepFunctions';
-import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
+import { fetchProductsList } from './helpers/fetchFunctions';
 import './style.css';
 import { createProductElement } from './helpers/shopFunctions';
 

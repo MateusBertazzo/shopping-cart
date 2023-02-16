@@ -1,4 +1,4 @@
-import { saveCartID, removeCartID } from './cartFunctions';
+import { saveCartID, removeCartID, getSavedCartIDs } from './cartFunctions';
 import { fetchProduct } from './fetchFunctions';
 
 // Esses comentários que estão antes de cada uma das funções são chamados de JSdoc,
@@ -122,7 +122,7 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     'product__add',
     'Adicionar ao carrinho!',
   );
-
+  // Adiciono evento de click diretamente no meu button, armazeno na minha variavel o ID do produto, e logo sem seguida passo esse ID como parametro para a function que busca os dados na API(fetchProduct), logo em seguida com os dados retornados da API uso a function (createCartProductElement) que cria pra mim todos os elementos no carrinho de compras de forma dinamica, logo em seguida apenas capturo minha OL e coloco a lista de produtos como filho da Ol adicionando ela ao HTML, depois disso pego o ID do produto e salvo no localStorage
   cartButton.addEventListener('click', async (event) => {
     const getID = getIdFromProduct(event.target.parentNode);
     const data = await fetchProduct(getID);
@@ -135,3 +135,16 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
 
   return section;
 };
+
+// Aqui eu resgato do LocalStorage os Ids dos produtos e logo em seguida passo como parametro para a fetchFunction que retorna os dados da API depois uso a mesma lógica de cima para adicionar esses elementos no meu HTML.
+const getItemLocalStorage = async () => {
+  const idsLocalStorage = getSavedCartIDs();
+  idsLocalStorage.forEach(async (id) => {
+    const getID = await fetchProduct((id));
+    const createCar = createCartProductElement(getID);
+    const ol = document.querySelector('.cart__products');
+    ol.appendChild(createCar);
+  });
+};
+
+getItemLocalStorage();
